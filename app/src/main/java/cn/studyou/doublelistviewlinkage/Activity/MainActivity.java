@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private String[] leftStr = new String[]{"面食类", "盖饭", "寿司", "烧烤", "酒水", "凉菜", "小吃", "粥", "休闲"};
 
-    private boolean[] flagArray = {true, false, false, false, false, false, false, false, false};
+    private boolean[] flagArray = {true, false, false, false, false, false, false, false, false};//选中的左边列表标记
 
     /**
      * 每个大类对应的子
@@ -71,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
                 int rightSection = 0;
                 for (int i = 0; i < position; i++) {
-                    rightSection += sectionedAdapter.getCountForSection(i) + 1;
+                    rightSection += sectionedAdapter.getCountForSection(i) + 1;//右边开始的头item位置position
                 }
-                pinnedListView.setSelection(rightSection);
+                pinnedListView.setSelection(rightSection);//设置当前item
 
             }
 
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
-            int y = 0;
+            int y = 0;//当前选中的大类
             int x = 0;
             int z = 0;
 
@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 if (isScroll) {
                     for (int i = 0; i < rightStr.length; i++) {
+                        //滚动时,第一个可见item的大类postion位置刚好同大类index索引相同,切换左边列表
                         if (i == sectionedAdapter.getSectionForPosition(pinnedListView.getFirstVisiblePosition())) {
                             flagArray[i] = true;
                             x = i;
